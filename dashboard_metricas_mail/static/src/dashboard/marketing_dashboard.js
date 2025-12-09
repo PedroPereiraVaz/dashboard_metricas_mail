@@ -173,9 +173,26 @@ export class MarketingDashboard extends Component {
         if (value === undefined || value === null) return "0%";
         return parseFloat(value).toFixed(1) + "%";
     }
-    getStageColor(index) {
-        const colors = ['bg-soft-primary', 'bg-soft-success', 'bg-soft-warning', 'bg-soft-danger', 'bg-soft-info'];
-        return colors[index % colors.length];
+    getStageColor(stageName) {
+        if (!stageName) return 'bg-dark-gray';
+        const name = stageName.toLowerCase();
+        if (name.includes('new') || name.includes('nuevo')) return 'bg-gradient-warning';
+        if (name.includes('design') || name.includes('diseño')) return 'bg-gradient-primary';
+        if (name.includes('schedule') || name.includes('programar') || name.includes('cola')) return 'bg-gradient-info';
+        if (name.includes('sent') || name.includes('enviado')) return 'bg-gradient-success';
+        if (name.includes('cancel') || name.includes('stopped')) return 'bg-gradient-danger';
+        return 'bg-dark-gray';
+    }
+
+    getStageBadgeColor(stageName) {
+        if (!stageName) return 'text-dark';
+        const name = stageName.toLowerCase();
+        if (name.includes('new') || name.includes('nuevo')) return 'text-warning';
+        if (name.includes('design') || name.includes('diseño')) return 'text-blue';
+        if (name.includes('schedule') || name.includes('programar') || name.includes('cola')) return 'text-info';
+        if (name.includes('sent') || name.includes('enviado')) return 'text-success';
+        if (name.includes('cancel') || name.includes('stopped')) return 'text-danger';
+        return 'text-dark';
     }
 }
 

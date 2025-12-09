@@ -25,11 +25,28 @@
 }
 
 .metric-card {
-  transition: transform 0.2s;
+  transition: transform 0.2s ease-in-out;
+  margin-bottom: 0.5rem !important;
 }
 
 .metric-card:hover {
-  transform: translateY(-2px);
+  transform: scale(1.01);
+}
+
+.metric-list-text,
+.metric-title {
+  font-size: 1.1rem; /* Slightly larger */
+  font-weight: 600; /* Semi-bold */
+}
+
+.deliverability-title {
+  font-size: 1.3rem; /* Even larger for Deliverability */
+  font-weight: 600;
+  color: white !important; /* Force white */
+}
+
+.metric-value {
+  font-weight: 700 !important;
 }
 
 .bg-gradient-primary {
@@ -50,6 +67,14 @@
 
 .bg-gradient-info {
   background: linear-gradient(45deg, #36b9cc, #258391);
+}
+
+.bg-dark-gray {
+  background-color: #343a40 !important; /* Darker than secondary */
+}
+
+.text-blue {
+  color: #0056b3 !important;
 }
 
 .card {
