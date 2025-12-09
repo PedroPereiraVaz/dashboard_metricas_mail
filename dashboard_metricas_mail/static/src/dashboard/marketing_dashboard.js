@@ -173,6 +173,10 @@ export class MarketingDashboard extends Component {
         if (value === undefined || value === null) return "0%";
         return parseFloat(value).toFixed(1) + "%";
     }
+    getStageColor(index) {
+        const colors = ['bg-soft-primary', 'bg-soft-success', 'bg-soft-warning', 'bg-soft-danger', 'bg-soft-info'];
+        return colors[index % colors.length];
+    }
 }
 
 MarketingDashboard.template = "dashboard_metricas_mail.MarketingDashboard";

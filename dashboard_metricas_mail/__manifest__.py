@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 {
     'name': 'Email Marketing Dashboard',
     'version': '1.0',
@@ -5,22 +6,6 @@
     'website': 'https://wavext.io',
     'category': 'Marketing/Email Marketing',
     'summary': 'Dashboard para metricas de Email Marketing',
-    'license': 'LGPL-3',
-    'depends': [
-        'base',
-        'mass_mailing',
-        'web',
-        'utm',
-    ],
-    'data': [
-        'security/ir.model.access.csv',
-        'views/marketing_dashboard_menus.xml',
-    ],
-    'assets': {
-        'web.assets_backend': [
-            'dashboard_metricas_mail/static/src/dashboard/**/*',
-        ],
-    },
     'description': '''
         Dashboard de Métricas de Email Marketing
         ========================================
@@ -75,8 +60,24 @@
         Compatible con Odoo 18 Community y Enterprise.
         
     ''',
+    'depends': [
+        'base',
+        'mass_mailing',
+        'web',
+        'utm',
+    ],
+    'data': [
+        'security/ir.model.access.csv',
+        'views/marketing_dashboard_menus.xml',
+    ],
+    'assets': {
+        'web.assets_backend': [
+            'dashboard_metricas_mail/static/src/dashboard/**/*',
+        ],
+    },
     'images': [],
     'installable': True,
-    'application': True,
+    'application': False,
     'auto_install': False,
+    'license': 'LGPL-3',
 }

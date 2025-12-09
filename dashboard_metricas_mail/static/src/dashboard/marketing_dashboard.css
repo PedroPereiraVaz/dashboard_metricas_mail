@@ -1,6 +1,27 @@
-.o_marketing_dashboard {
-  background-color: #f8f9fa;
-  font-family: "Inter", sans-serif;
+/* Soft Color Variants for better readability */
+.bg-soft-primary {
+  background-color: #e3f2fd !important;
+  color: #0d47a1 !important;
+}
+
+.bg-soft-success {
+  background-color: #e8f5e9 !important;
+  color: #1b5e20 !important;
+}
+
+.bg-soft-warning {
+  background-color: #fff3e0 !important;
+  color: #e65100 !important;
+}
+
+.bg-soft-danger {
+  background-color: #ffebee !important;
+  color: #b71c1c !important;
+}
+
+.bg-soft-info {
+  background-color: #e0f7fa !important;
+  color: #006064 !important;
 }
 
 .metric-card {
@@ -8,7 +29,7 @@
 }
 
 .metric-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-2px);
 }
 
 .bg-gradient-primary {
@@ -19,6 +40,10 @@
   background: linear-gradient(45deg, #1cc88a, #13855c);
 }
 
+.bg-gradient-warning {
+  background: linear-gradient(45deg, #f6c23e, #dda20a);
+}
+
 .bg-gradient-danger {
   background: linear-gradient(45deg, #e74a3b, #be2617);
 }
@@ -27,29 +52,18 @@
   background: linear-gradient(45deg, #36b9cc, #258391);
 }
 
-.bg-gradient-warning {
-  background: linear-gradient(45deg, #f6c23e, #dda20a);
-}
-
 .card {
-  border-radius: 0.75rem;
+  border-radius: 0.5rem;
 }
 
 .card-title {
-  font-size: 0.9rem;
+  font-size: 0.8rem;
+  font-weight: bold;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  opacity: 0.8;
+  letter-spacing: 0.05rem;
+  margin-bottom: 0.5rem;
 }
 
 .display-6 {
-  font-size: 2.5rem;
-}
-
-.cursor-pointer {
-  cursor: pointer;
-}
-
-.list-group-item.cursor-pointer:hover {
-  background-color: #f8f9fa;
+  font-size: 2rem;
 }

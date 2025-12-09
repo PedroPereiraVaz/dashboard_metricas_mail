@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <templates xml:space="preserve">
     <t t-name="dashboard_metricas_mail.MarketingDashboard" owl="1">
-        <div class="o_marketing_dashboard h-100 overflow-auto p-4">
-            <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mb-4 gap-3">
+        <div class="o_marketing_dashboard h-100 overflow-auto p-3">
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mb-3 gap-2">
                 <h1 class="text-primary fw-bold">Email Marketing Dashboard</h1>
                 <div class="d-flex flex-column flex-md-row gap-2 align-items-center">
                     
@@ -29,12 +29,12 @@
 
             <div t-else="" class="container-fluid">
                 <!-- Deliverability Section -->
-                <div class="row mb-4">
+                <div class="row mb-3">
                     <div class="col-12">
-                        <h3 class="text-primary mb-3"><i class="fa fa-paper-plane me-2"/>Deliverability &amp; Quality</h3>
+                        <h3 class="text-primary mb-2"><i class="fa fa-paper-plane me-2"/>Deliverability &amp; Quality</h3>
                     </div>
                     <div class="col-md-3">
-                        <div class="card shadow-sm border-0 mb-3 metric-card bg-gradient-primary text-white cursor-pointer" t-on-click="() => this.openDeliverability('sent')">
+                        <div class="card shadow-sm border-0 mb-2 metric-card bg-gradient-primary text-white cursor-pointer" t-on-click="() => this.openDeliverability('sent')">
                             <div class="card-body">
                                 <h5 class="card-title">Sent</h5>
                                 <h2 class="display-6 fw-bold text-white" t-esc="formatNumber(state.metrics.deliverability.sent)"/>
@@ -43,7 +43,7 @@
                         </div>
                     </div>
                     <div class="col-md-3">
-                        <div class="card shadow-sm border-0 mb-3 metric-card bg-gradient-success text-white cursor-pointer" t-on-click="() => this.openDeliverability('delivered')">
+                        <div class="card shadow-sm border-0 mb-2 metric-card bg-gradient-success text-white cursor-pointer" t-on-click="() => this.openDeliverability('delivered')">
                             <div class="card-body">
                                 <h5 class="card-title">Delivered</h5>
                                 <h2 class="display-6 fw-bold text-white" t-esc="formatNumber(state.metrics.deliverability.delivered)"/>
@@ -52,7 +52,7 @@
                         </div>
                     </div>
                     <div class="col-md-3">
-                        <div class="card shadow-sm border-0 mb-3 metric-card bg-gradient-warning text-white cursor-pointer" t-on-click="() => this.openDeliverability('bounced')">
+                        <div class="card shadow-sm border-0 mb-2 metric-card bg-gradient-warning text-white cursor-pointer" t-on-click="() => this.openDeliverability('bounced')">
                             <div class="card-body">
                                 <h5 class="card-title">Bounced</h5>
                                 <h2 class="display-6 fw-bold text-white" t-esc="formatNumber(state.metrics.deliverability.bounced)"/>
@@ -61,7 +61,7 @@
                         </div>
                     </div>
                     <div class="col-md-3">
-                        <div class="card shadow-sm border-0 mb-3 metric-card bg-gradient-danger text-white cursor-pointer" t-on-click="() => this.openDeliverability('exception')">
+                        <div class="card shadow-sm border-0 mb-2 metric-card bg-gradient-danger text-white cursor-pointer" t-on-click="() => this.openDeliverability('exception')">
                             <div class="card-body">
                                 <h5 class="card-title">Exception</h5>
                                 <h2 class="display-6 fw-bold text-white" t-esc="formatNumber(state.metrics.deliverability.exception)"/>
@@ -72,12 +72,12 @@
                 </div>
 
                 <!-- Engagement Section -->
-                <div class="row mb-4">
+                <div class="row mb-3">
                     <div class="col-12">
-                        <h3 class="text-primary mb-3"><i class="fa fa-users me-2"/>Engagement</h3>
+                        <h3 class="text-primary mb-2"><i class="fa fa-users me-2"/>Engagement</h3>
                     </div>
                     <div class="col-md-3">
-                        <div class="card shadow-sm border-0 mb-3">
+                        <div class="card shadow-sm border-0 mb-2">
                             <div class="card-body text-center">
                                 <h6 class="text-muted text-uppercase">Open Rate</h6>
                                 <h2 class="text-primary fw-bold" t-esc="formatPercentage(state.metrics.engagement.open_rate)"/>
@@ -86,7 +86,7 @@
                         </div>
                     </div>
                     <div class="col-md-3">
-                        <div class="card shadow-sm border-0 mb-3">
+                        <div class="card shadow-sm border-0 mb-2">
                             <div class="card-body text-center">
                                 <h6 class="text-muted text-uppercase">Click Rate (CTR)</h6>
                                 <h2 class="text-info fw-bold" t-esc="formatPercentage(state.metrics.engagement.click_rate)"/>
@@ -95,7 +95,7 @@
                         </div>
                     </div>
                     <div class="col-md-3">
-                        <div class="card shadow-sm border-0 mb-3">
+                        <div class="card shadow-sm border-0 mb-2">
                             <div class="card-body text-center">
                                 <h6 class="text-muted text-uppercase">Reply Rate</h6>
                                 <h2 class="text-warning fw-bold" t-esc="formatPercentage(state.metrics.engagement.reply_rate)"/>
@@ -104,7 +104,7 @@
                         </div>
                     </div>
                     <div class="col-md-3">
-                        <div class="card shadow-sm border-0 mb-3">
+                        <div class="card shadow-sm border-0 mb-2">
                             <div class="card-body text-center">
                                 <h6 class="text-muted text-uppercase">Click-to-Open (CTOR)</h6>
                                 <h2 class="text-success fw-bold" t-esc="formatPercentage(state.metrics.engagement.ctor)"/>
@@ -113,9 +113,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="row mb-4">
+                <div class="row mb-3">
                     <div class="col-12">
-                        <h3 class="text-primary mb-3"><i class="fa fa-dollar me-2"/>Conversion</h3>
+                        <h3 class="text-primary mb-2"><i class="fa fa-dollar me-2"/>Conversion</h3>
                     </div>
                     <div class="col-md-3">
                         <div class="card shadow-sm border-0 mb-3">
@@ -152,38 +152,38 @@
                 </div>
 
                 <!-- List Health & Automation -->
-                <div class="row mb-4">
+                <div class="row mb-3">
                     <div class="col-md-6">
-                        <h3 class="text-primary mb-3"><i class="fa fa-heartbeat me-2"/>List Health</h3>
+                        <h3 class="text-primary mb-2"><i class="fa fa-heartbeat me-2"/>List Health</h3>
                         <div class="card shadow-sm border-0 p-3">
                             <ul class="list-group list-group-flush">
-                                <li class="list-group-item d-flex justify-content-between align-items-center cursor-pointer" t-on-click="() => this.openContacts('all')">
+                                <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center cursor-pointer metric-card bg-soft-primary mb-1 rounded shadow-sm" t-on-click="() => this.openContacts('all')">
                                     Total Contacts
-                                    <span class="badge bg-primary rounded-pill text-white" t-esc="formatNumber(state.metrics.list_health.total_contacts)"/>
+                                    <span class="badge bg-primary text-white rounded-pill" t-esc="formatNumber(state.metrics.list_health.total_contacts)"/>
                                 </li>
-                                <li class="list-group-item d-flex justify-content-between align-items-center cursor-pointer" t-on-click="() => this.openContacts('active')">
+                                <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center cursor-pointer metric-card bg-soft-success mb-1 rounded shadow-sm" t-on-click="() => this.openContacts('active')">
                                     Active Contacts
-                                    <span class="badge bg-success rounded-pill text-white" t-esc="formatNumber(state.metrics.list_health.active_contacts)"/>
+                                    <span class="badge bg-success text-white rounded-pill" t-esc="formatNumber(state.metrics.list_health.active_contacts)"/>
                                 </li>
-                                <li class="list-group-item d-flex justify-content-between align-items-center cursor-pointer" t-on-click="() => this.openContacts('new')">
+                                <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center cursor-pointer metric-card bg-soft-warning mb-1 rounded shadow-sm" t-on-click="() => this.openContacts('new')">
                                     New (30d)
-                                    <span class="badge bg-info rounded-pill text-white" t-esc="formatNumber(state.metrics.list_health.new_contacts_30d)"/>
+                                    <span class="badge bg-warning text-white rounded-pill" t-esc="formatNumber(state.metrics.list_health.new_contacts_30d)"/>
                                 </li>
-                                <li class="list-group-item d-flex justify-content-between align-items-center cursor-pointer" t-on-click="() => this.openContacts('blacklisted')">
+                                <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center cursor-pointer metric-card bg-soft-danger mb-1 rounded shadow-sm" t-on-click="() => this.openContacts('blacklisted')">
                                     Blacklisted
-                                    <span class="badge bg-dark text-white rounded-pill text-white" t-esc="formatNumber(state.metrics.list_health.blacklisted)"/>
+                                    <span class="badge bg-danger text-white rounded-pill" t-esc="formatNumber(state.metrics.list_health.blacklisted)"/>
                                 </li>
                             </ul>
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <h3 class="text-primary mb-3"><i class="fa fa-columns me-2"/>Campaign Stages</h3>
+                        <h3 class="text-primary mb-2"><i class="fa fa-columns me-2"/>Campaign Stages</h3>
                         <div class="card shadow-sm border-0 p-3">
                             <ul class="list-group list-group-flush" t-if="state.metrics.campaign_stages.has_stages">
                                 <t t-foreach="state.metrics.campaign_stages.stages" t-as="stage" t-key="stage.id">
-                                    <li class="list-group-item d-flex justify-content-between align-items-center cursor-pointer" t-on-click="() => this.openStage(stage.id)">
-                                        <t t-esc="stage.name"/>
-                                        <span class="badge bg-secondary rounded-pill" t-esc="formatNumber(stage.count)"/>
+                                    <li t-att-class="'list-group-item list-group-item-action d-flex justify-content-between align-items-center cursor-pointer metric-card mb-1 rounded shadow-sm ' + getStageColor(stage_index)" t-on-click="() => this.openStage(stage.id)">
+                                        <span class="fw-bold"><t t-esc="stage.name"/></span>
+                                        <span class="badge bg-dark text-white rounded-pill" t-esc="formatNumber(stage.count)"/>
                                     </li>
                                 </t>
                             </ul>
