@@ -1,0 +1,55 @@
+.o_marketing_dashboard {
+  background-color: #f8f9fa;
+  font-family: "Inter", sans-serif;
+}
+
+.metric-card {
+  transition: transform 0.2s;
+}
+
+.metric-card:hover {
+  transform: translateY(-5px);
+}
+
+.bg-gradient-primary {
+  background: linear-gradient(45deg, #4e73df, #224abe);
+}
+
+.bg-gradient-success {
+  background: linear-gradient(45deg, #1cc88a, #13855c);
+}
+
+.bg-gradient-danger {
+  background: linear-gradient(45deg, #e74a3b, #be2617);
+}
+
+.bg-gradient-info {
+  background: linear-gradient(45deg, #36b9cc, #258391);
+}
+
+.bg-gradient-warning {
+  background: linear-gradient(45deg, #f6c23e, #dda20a);
+}
+
+.card {
+  border-radius: 0.75rem;
+}
+
+.card-title {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.8;
+}
+
+.display-6 {
+  font-size: 2.5rem;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.list-group-item.cursor-pointer:hover {
+  background-color: #f8f9fa;
+}

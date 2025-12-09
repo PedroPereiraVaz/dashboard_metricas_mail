@@ -1,0 +1,237 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* dashboard_metricas_mail
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-09 13:51+0000\n"
+"PO-Revision-Date: 2025-12-09 13:51+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: dashboard_metricas_mail
+#. odoo-javascript
+#: code:addons/dashboard_metricas_mail/static/src/dashboard/marketing_dashboard.xml:0
+msgid "Active Contacts"
+msgstr "Contactos Activos"
+
+#. module: dashboard_metricas_mail
+#. odoo-javascript
+#: code:addons/dashboard_metricas_mail/static/src/dashboard/marketing_dashboard.xml:0
+msgid "All Campaigns"
+msgstr "Todas las Campañas"
+
+#. module: dashboard_metricas_mail
+#. odoo-javascript
+#: code:addons/dashboard_metricas_mail/static/src/dashboard/marketing_dashboard.xml:0
+msgid "All Mailings"
+msgstr "Todos los Envíos"
+
+#. module: dashboard_metricas_mail
+#. odoo-javascript
+#: code:addons/dashboard_metricas_mail/static/src/dashboard/marketing_dashboard.xml:0
+msgid "Blacklisted"
+msgstr "Lista Negra"
+
+#. module: dashboard_metricas_mail
+#. odoo-javascript
+#: code:addons/dashboard_metricas_mail/static/src/dashboard/marketing_dashboard.xml:0
+msgid "Bounced"
+msgstr "Rebotados"
+
+#. module: dashboard_metricas_mail
+#. odoo-javascript
+#: code:addons/dashboard_metricas_mail/static/src/dashboard/marketing_dashboard.xml:0
+msgid "Campaign Stages"
+msgstr "Etapas de la campaña"
+
+#. module: dashboard_metricas_mail
+#. odoo-javascript
+#: code:addons/dashboard_metricas_mail/static/src/dashboard/marketing_dashboard.xml:0
+msgid "Click Rate (CTR)"
+msgstr "Tasa de Clics (CTR)"
+
+#. module: dashboard_metricas_mail
+#. odoo-javascript
+#: code:addons/dashboard_metricas_mail/static/src/dashboard/marketing_dashboard.xml:0
+msgid "Click-to-Open (CTOR)"
+msgstr "Clic de Apertura (CTOR)"
+
+#. module: dashboard_metricas_mail
+#. odoo-javascript
+#: code:addons/dashboard_metricas_mail/static/src/dashboard/marketing_dashboard.xml:0
+msgid "Clicks"
+msgstr "Clics"
+
+#. module: dashboard_metricas_mail
+#. odoo-javascript
+#: code:addons/dashboard_metricas_mail/static/src/dashboard/marketing_dashboard.xml:0
+msgid "Clicks:"
+msgstr "Clics:"
+
+#. module: dashboard_metricas_mail
+#. odoo-javascript
+#: code:addons/dashboard_metricas_mail/static/src/dashboard/marketing_dashboard.xml:0
+msgid "Conversion"
+msgstr "Conversión"
+
+#. module: dashboard_metricas_mail
+#. odoo-javascript
+#: code:addons/dashboard_metricas_mail/static/src/dashboard/marketing_dashboard.xml:0
+msgid "Conversion Rate"
+msgstr "Tasa de Conversión"
+
+#. module: dashboard_metricas_mail
+#. odoo-javascript
+#: code:addons/dashboard_metricas_mail/static/src/dashboard/marketing_dashboard.xml:0
+msgid "Conversions"
+msgstr "Conversiones"
+
+#. module: dashboard_metricas_mail
+#: model:ir.model.fields,field_description:dashboard_metricas_mail.field_marketing_dashboard_handler__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: dashboard_metricas_mail
+#: model:ir.model.fields,field_description:dashboard_metricas_mail.field_marketing_dashboard_handler__create_date
+msgid "Created on"
+msgstr "Creado el"
+
+#. module: dashboard_metricas_mail
+#: model:ir.actions.client,name:dashboard_metricas_mail.action_marketing_dashboard
+#: model:ir.ui.menu,name:dashboard_metricas_mail.menu_marketing_dashboard
+msgid "Dashboard de metricas"
+msgstr "Tablero de Métricas"
+
+#. module: dashboard_metricas_mail
+#. odoo-javascript
+#: code:addons/dashboard_metricas_mail/static/src/dashboard/marketing_dashboard.xml:0
+msgid "Deliverability & Quality"
+msgstr "Entregabilidad y Calidad"
+
+#. module: dashboard_metricas_mail
+#. odoo-javascript
+#: code:addons/dashboard_metricas_mail/static/src/dashboard/marketing_dashboard.xml:0
+msgid "Delivered"
+msgstr "Entregados"
+
+#. module: dashboard_metricas_mail
+#: model:ir.model.fields,field_description:dashboard_metricas_mail.field_marketing_dashboard_handler__display_name
+msgid "Display Name"
+msgstr "Nombre Mostrado"
+
+#. module: dashboard_metricas_mail
+#. odoo-javascript
+#: code:addons/dashboard_metricas_mail/static/src/dashboard/marketing_dashboard.xml:0
+msgid "Email Marketing Dashboard"
+msgstr "Tablero de Marketing por Email"
+
+#. module: dashboard_metricas_mail
+#. odoo-javascript
+#: code:addons/dashboard_metricas_mail/static/src/dashboard/marketing_dashboard.xml:0
+msgid "Engagement"
+msgstr "Interacción"
+
+#. module: dashboard_metricas_mail
+#. odoo-javascript
+#: code:addons/dashboard_metricas_mail/static/src/dashboard/marketing_dashboard.xml:0
+msgid "Exception"
+msgstr "Excepción"
+
+#. module: dashboard_metricas_mail
+#: model:ir.model.fields,field_description:dashboard_metricas_mail.field_marketing_dashboard_handler__id
+msgid "ID"
+msgstr "ID"
+
+#. module: dashboard_metricas_mail
+#: model:ir.model.fields,field_description:dashboard_metricas_mail.field_marketing_dashboard_handler__write_uid
+msgid "Last Updated by"
+msgstr "Última Actualización por"
+
+#. module: dashboard_metricas_mail
+#: model:ir.model.fields,field_description:dashboard_metricas_mail.field_marketing_dashboard_handler__write_date
+msgid "Last Updated on"
+msgstr "Última Actualización el"
+
+#. module: dashboard_metricas_mail
+#. odoo-javascript
+#: code:addons/dashboard_metricas_mail/static/src/dashboard/marketing_dashboard.xml:0
+msgid "List Health"
+msgstr "Salud de la Lista"
+
+#. module: dashboard_metricas_mail
+#: model:ir.model,name:dashboard_metricas_mail.model_marketing_dashboard_handler
+msgid "Marketing Dashboard Handler"
+msgstr "Gestor del Tablero de Marketing"
+
+#. module: dashboard_metricas_mail
+#. odoo-javascript
+#: code:addons/dashboard_metricas_mail/static/src/dashboard/marketing_dashboard.xml:0
+msgid "New (30d)"
+msgstr "Nuevos (30d)"
+
+#. module: dashboard_metricas_mail
+#. odoo-javascript
+#: code:addons/dashboard_metricas_mail/static/src/dashboard/marketing_dashboard.xml:0
+msgid "No campaign stages defined."
+msgstr "No hay etapas de campaña definidas."
+
+#. module: dashboard_metricas_mail
+#. odoo-javascript
+#: code:addons/dashboard_metricas_mail/static/src/dashboard/marketing_dashboard.xml:0
+msgid "Open Rate"
+msgstr "Tasa de Apertura"
+
+#. module: dashboard_metricas_mail
+#. odoo-javascript
+#: code:addons/dashboard_metricas_mail/static/src/dashboard/marketing_dashboard.xml:0
+msgid "Opens"
+msgstr "Aperturas"
+
+#. module: dashboard_metricas_mail
+#. odoo-javascript
+#: code:addons/dashboard_metricas_mail/static/src/dashboard/marketing_dashboard.xml:0
+msgid "Rate:"
+msgstr "Tasa:"
+
+#. module: dashboard_metricas_mail
+#. odoo-javascript
+#: code:addons/dashboard_metricas_mail/static/src/dashboard/marketing_dashboard.xml:0
+msgid "Replies"
+msgstr "Respuestas"
+
+#. module: dashboard_metricas_mail
+#. odoo-javascript
+#: code:addons/dashboard_metricas_mail/static/src/dashboard/marketing_dashboard.xml:0
+msgid "Reply Rate"
+msgstr "Tasa de Respuesta"
+
+#. module: dashboard_metricas_mail
+#. odoo-javascript
+#: code:addons/dashboard_metricas_mail/static/src/dashboard/marketing_dashboard.xml:0
+msgid "Rev. per Email"
+msgstr "Ingresos por Email"
+
+#. module: dashboard_metricas_mail
+#. odoo-javascript
+#: code:addons/dashboard_metricas_mail/static/src/dashboard/marketing_dashboard.xml:0
+msgid "Sent"
+msgstr "Enviados"
+
+#. module: dashboard_metricas_mail
+#. odoo-javascript
+#: code:addons/dashboard_metricas_mail/static/src/dashboard/marketing_dashboard.xml:0
+msgid "Total Contacts"
+msgstr "Total de Contactos"
+
+#. module: dashboard_metricas_mail
+#. odoo-javascript
+#: code:addons/dashboard_metricas_mail/static/src/dashboard/marketing_dashboard.xml:0
+msgid "Total Revenue"
+msgstr "Ingresos Totales"
