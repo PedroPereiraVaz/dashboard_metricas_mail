@@ -2,18 +2,18 @@
 <templates xml:space="preserve">
     <t t-name="dashboard_metricas_mail.MarketingDashboard" owl="1">
         <div class="o_marketing_dashboard h-100 overflow-auto p-4">
-            <div class="d-flex justify-content-between align-items-center mb-4">
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mb-4 gap-3">
                 <h1 class="text-primary fw-bold">Email Marketing Dashboard</h1>
-                <div class="d-flex gap-2 align-items-center">
+                <div class="d-flex flex-column flex-md-row gap-2 align-items-center">
                     
-                    <select class="form-select" name="campaign_id" t-model="state.filters.campaign_id" t-on-change="onFilterChange">
+                    <select class="form-select" name="campaign_id" t-model="state.filters.campaign_id" t-on-change="onFilterChange" style="width: 250px;">
                         <option value="">All Campaigns</option>
                         <t t-foreach="state.options.campaigns" t-as="campaign" t-key="campaign.id">
                             <option t-att-value="campaign.id" t-esc="campaign.name"/>
                         </t>
                     </select>
                     
-                    <select class="form-select" name="mailing_id" t-model="state.filters.mailing_id" t-on-change="onFilterChange">
+                    <select class="form-select" name="mailing_id" t-model="state.filters.mailing_id" t-on-change="onFilterChange" style="width: 250px;">
                         <option value="">All Mailings</option>
                         <t t-foreach="state.options.mailings" t-as="mailing" t-key="mailing.id">
                             <option t-att-value="mailing.id" t-esc="mailing.name"/>
@@ -31,13 +31,13 @@
                 <!-- Deliverability Section -->
                 <div class="row mb-4">
                     <div class="col-12">
-                        <h3 class="text-secondary mb-3"><i class="fa fa-paper-plane me-2"/>Deliverability &amp; Quality</h3>
+                        <h3 class="text-primary mb-3"><i class="fa fa-paper-plane me-2"/>Deliverability &amp; Quality</h3>
                     </div>
                     <div class="col-md-3">
                         <div class="card shadow-sm border-0 mb-3 metric-card bg-gradient-primary text-white cursor-pointer" t-on-click="() => this.openDeliverability('sent')">
                             <div class="card-body">
                                 <h5 class="card-title">Sent</h5>
-                                <h2 class="display-6 fw-bold" t-esc="formatNumber(state.metrics.deliverability.sent)"/>
+                                <h2 class="display-6 fw-bold text-white" t-esc="formatNumber(state.metrics.deliverability.sent)"/>
                                 <small>Rate: <t t-esc="formatPercentage(state.metrics.deliverability.sent_rate)"/></small>
                             </div>
                         </div>
@@ -46,7 +46,7 @@
                         <div class="card shadow-sm border-0 mb-3 metric-card bg-gradient-success text-white cursor-pointer" t-on-click="() => this.openDeliverability('delivered')">
                             <div class="card-body">
                                 <h5 class="card-title">Delivered</h5>
-                                <h2 class="display-6 fw-bold" t-esc="formatNumber(state.metrics.deliverability.delivered)"/>
+                                <h2 class="display-6 fw-bold text-white" t-esc="formatNumber(state.metrics.deliverability.delivered)"/>
                                 <small>Rate: <t t-esc="formatPercentage(state.metrics.deliverability.delivery_rate)"/></small>
                             </div>
                         </div>
@@ -55,7 +55,7 @@
                         <div class="card shadow-sm border-0 mb-3 metric-card bg-gradient-warning text-white cursor-pointer" t-on-click="() => this.openDeliverability('bounced')">
                             <div class="card-body">
                                 <h5 class="card-title">Bounced</h5>
-                                <h2 class="display-6 fw-bold" t-esc="formatNumber(state.metrics.deliverability.bounced)"/>
+                                <h2 class="display-6 fw-bold text-white" t-esc="formatNumber(state.metrics.deliverability.bounced)"/>
                                 <small>Rate: <t t-esc="formatPercentage(state.metrics.deliverability.bounce_rate)"/></small>
                             </div>
                         </div>
@@ -64,7 +64,7 @@
                         <div class="card shadow-sm border-0 mb-3 metric-card bg-gradient-danger text-white cursor-pointer" t-on-click="() => this.openDeliverability('exception')">
                             <div class="card-body">
                                 <h5 class="card-title">Exception</h5>
-                                <h2 class="display-6 fw-bold" t-esc="formatNumber(state.metrics.deliverability.exception)"/>
+                                <h2 class="display-6 fw-bold text-white" t-esc="formatNumber(state.metrics.deliverability.exception)"/>
                                 <small>Rate: <t t-esc="formatPercentage(state.metrics.deliverability.exception_rate)"/></small>
                             </div>
                         </div>
@@ -74,7 +74,7 @@
                 <!-- Engagement Section -->
                 <div class="row mb-4">
                     <div class="col-12">
-                        <h3 class="text-secondary mb-3"><i class="fa fa-users me-2"/>Engagement</h3>
+                        <h3 class="text-primary mb-3"><i class="fa fa-users me-2"/>Engagement</h3>
                     </div>
                     <div class="col-md-3">
                         <div class="card shadow-sm border-0 mb-3">
@@ -115,7 +115,7 @@
                 </div>
                 <div class="row mb-4">
                     <div class="col-12">
-                        <h3 class="text-secondary mb-3"><i class="fa fa-dollar me-2"/>Conversion</h3>
+                        <h3 class="text-primary mb-3"><i class="fa fa-dollar me-2"/>Conversion</h3>
                     </div>
                     <div class="col-md-3">
                         <div class="card shadow-sm border-0 mb-3">
@@ -154,30 +154,30 @@
                 <!-- List Health & Automation -->
                 <div class="row mb-4">
                     <div class="col-md-6">
-                        <h3 class="text-secondary mb-3"><i class="fa fa-heartbeat me-2"/>List Health</h3>
+                        <h3 class="text-primary mb-3"><i class="fa fa-heartbeat me-2"/>List Health</h3>
                         <div class="card shadow-sm border-0 p-3">
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item d-flex justify-content-between align-items-center cursor-pointer" t-on-click="() => this.openContacts('all')">
                                     Total Contacts
-                                    <span class="badge bg-primary rounded-pill" t-esc="formatNumber(state.metrics.list_health.total_contacts)"/>
+                                    <span class="badge bg-primary rounded-pill text-white" t-esc="formatNumber(state.metrics.list_health.total_contacts)"/>
                                 </li>
                                 <li class="list-group-item d-flex justify-content-between align-items-center cursor-pointer" t-on-click="() => this.openContacts('active')">
                                     Active Contacts
-                                    <span class="badge bg-success rounded-pill" t-esc="formatNumber(state.metrics.list_health.active_contacts)"/>
+                                    <span class="badge bg-success rounded-pill text-white" t-esc="formatNumber(state.metrics.list_health.active_contacts)"/>
                                 </li>
                                 <li class="list-group-item d-flex justify-content-between align-items-center cursor-pointer" t-on-click="() => this.openContacts('new')">
                                     New (30d)
-                                    <span class="badge bg-info rounded-pill" t-esc="formatNumber(state.metrics.list_health.new_contacts_30d)"/>
+                                    <span class="badge bg-info rounded-pill text-white" t-esc="formatNumber(state.metrics.list_health.new_contacts_30d)"/>
                                 </li>
                                 <li class="list-group-item d-flex justify-content-between align-items-center cursor-pointer" t-on-click="() => this.openContacts('blacklisted')">
                                     Blacklisted
-                                    <span class="badge bg-dark text-white rounded-pill" t-esc="formatNumber(state.metrics.list_health.blacklisted)"/>
+                                    <span class="badge bg-dark text-white rounded-pill text-white" t-esc="formatNumber(state.metrics.list_health.blacklisted)"/>
                                 </li>
                             </ul>
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <h3 class="text-secondary mb-3"><i class="fa fa-columns me-2"/>Campaign Stages</h3>
+                        <h3 class="text-primary mb-3"><i class="fa fa-columns me-2"/>Campaign Stages</h3>
                         <div class="card shadow-sm border-0 p-3">
                             <ul class="list-group list-group-flush" t-if="state.metrics.campaign_stages.has_stages">
                                 <t t-foreach="state.metrics.campaign_stages.stages" t-as="stage" t-key="stage.id">
