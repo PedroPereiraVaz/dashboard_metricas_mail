@@ -152,6 +152,7 @@ class MarketingDashboardHandler(models.TransientModel):
             'delivered': delivered,
             'bounced': bounced,
             'exception': exception,
+            'total': Trace.search_count(trace_domain) if trace_domain else Trace.search_count([]),
             'delivery_rate': (delivered / total_attempts * 100) if total_attempts else 0,
             'bounce_rate': (bounced / total_attempts * 100) if total_attempts else 0,
             'exception_rate': (exception / total_attempts * 100) if total_attempts else 0,

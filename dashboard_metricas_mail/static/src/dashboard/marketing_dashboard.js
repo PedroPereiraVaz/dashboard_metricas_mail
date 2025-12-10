@@ -117,6 +117,9 @@ export class MarketingDashboard extends Component {
             // EXCEPTION: Show all traces NOT in success statuses
             // This catches any error status regardless of name
             domain.push(['trace_status', 'not in', sentStatuses]);
+        } else if (type === 'total') {
+            // TOTAL: Show all traces properly associated with the campaign/mailing filters
+            // We don't need to push any specific status domain here as we want ALL traces
         }
 
         this.openView("mailing.trace", domain);
