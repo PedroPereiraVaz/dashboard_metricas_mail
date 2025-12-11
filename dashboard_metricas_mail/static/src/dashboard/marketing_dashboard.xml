@@ -47,7 +47,7 @@
                     <div class="col-md">
                         <div class="card shadow-sm border-0 mb-2 metric-card bg-gradient-primary text-white cursor-pointer" t-on-click="() => this.openDeliverability('sent')">
                             <div class="card-body">
-                                <h5 class="deliverability-title">Sent</h5>
+                                <h5 class="deliverability-title">Sent <i class="fa fa-question-circle-o fa-xs text-white-50 ms-1" title="Total emails sent minus exceptions."/></h5>
                                 <div class="text-center">
                                     <h2 class="display-6 metric-value text-white" t-esc="formatNumber(state.metrics.deliverability.sent)"/>
                                     <small>Rate: <t t-esc="formatPercentage(state.metrics.deliverability.sent_rate)"/></small>
@@ -58,7 +58,7 @@
                     <div class="col-md">
                         <div class="card shadow-sm border-0 mb-2 metric-card bg-gradient-success text-white cursor-pointer" t-on-click="() => this.openDeliverability('delivered')">
                             <div class="card-body">
-                                <h5 class="deliverability-title">Delivered</h5>
+                                <h5 class="deliverability-title">Delivered <i class="fa fa-question-circle-o fa-xs text-white-50 ms-1" title="Emails successfully delivered to the recipient."/></h5>
                                 <div class="text-center">
                                     <h2 class="display-6 metric-value text-white" t-esc="formatNumber(state.metrics.deliverability.delivered)"/>
                                     <small>Rate: <t t-esc="formatPercentage(state.metrics.deliverability.delivery_rate)"/></small>
@@ -69,7 +69,7 @@
                     <div class="col-md">
                         <div class="card shadow-sm border-0 mb-2 metric-card bg-gradient-warning text-white cursor-pointer" t-on-click="() => this.openDeliverability('bounced')">
                             <div class="card-body">
-                                <h5 class="deliverability-title">Bounced</h5>
+                                <h5 class="deliverability-title">Bounced <i class="fa fa-question-circle-o fa-xs text-white-50 ms-1" title="Emails rejected by the recipient's mail server."/></h5>
                                 <div class="text-center">
                                     <h2 class="display-6 metric-value text-white" t-esc="formatNumber(state.metrics.deliverability.bounced)"/>
                                     <small>Rate: <t t-esc="formatPercentage(state.metrics.deliverability.bounce_rate)"/></small>
@@ -80,7 +80,7 @@
                     <div class="col-md">
                         <div class="card shadow-sm border-0 mb-2 metric-card bg-gradient-danger text-white cursor-pointer" t-on-click="() => this.openDeliverability('exception')">
                             <div class="card-body">
-                                <h5 class="deliverability-title">Exception</h5>
+                                <h5 class="deliverability-title">Exception <i class="fa fa-question-circle-o fa-xs text-white-50 ms-1" title="System errors or configuration issues preventing sending."/></h5>
                                 <div class="text-center">
                                     <h2 class="display-6 metric-value text-white" t-esc="formatNumber(state.metrics.deliverability.exception)"/>
                                     <small>Rate: <t t-esc="formatPercentage(state.metrics.deliverability.exception_rate)"/></small>
@@ -98,7 +98,7 @@
                     <div class="col-md-3">
                         <div class="card shadow-sm border-0 mb-2 metric-card cursor-pointer" t-on-click="() => this.openEngagement('open')">
                             <div class="card-body">
-                                <h6 class="metric-title text-muted">Open Rate</h6>
+                                <h6 class="metric-title text-muted">Open Rate <i class="fa fa-info-circle text-muted ms-1" title="Percentage of recipients who opened the email."/></h6>
                                 <div class="text-center">
                                     <h2 class="text-primary metric-value" t-esc="formatPercentage(state.metrics.engagement.open_rate)"/>
                                     <small class="text-muted"><t t-esc="formatNumber(state.metrics.engagement.total_opens)"/> Opens</small>
@@ -109,7 +109,7 @@
                     <div class="col-md-3">
                         <div class="card shadow-sm border-0 mb-2 metric-card cursor-pointer" t-on-click="() => this.openEngagement('click')">
                             <div class="card-body">
-                                <h6 class="metric-title text-muted">Click Rate (CTR)</h6>
+                                <h6 class="metric-title text-muted">Click Rate (CTR) <i class="fa fa-info-circle text-muted ms-1" title="Percentage of recipients who clicked at least one link."/></h6>
                                 <div class="text-center">
                                     <h2 class="text-info metric-value" t-esc="formatPercentage(state.metrics.engagement.click_rate)"/>
                                     <small class="text-muted"><t t-esc="formatNumber(state.metrics.engagement.total_clicks)"/> Clicks</small>
@@ -120,7 +120,7 @@
                     <div class="col-md-3">
                         <div class="card shadow-sm border-0 mb-2 metric-card cursor-pointer" t-on-click="() => this.openEngagement('reply')">
                             <div class="card-body">
-                                <h6 class="metric-title text-muted">Reply Rate</h6>
+                                <h6 class="metric-title text-muted">Reply Rate <i class="fa fa-info-circle text-muted ms-1" title="Percentage of recipients who replied to the email."/></h6>
                                 <div class="text-center">
                                     <h2 class="text-warning metric-value" t-esc="formatPercentage(state.metrics.engagement.reply_rate)"/>
                                     <small class="text-muted"><t t-esc="formatNumber(state.metrics.engagement.total_replies)"/> Replies</small>
@@ -131,7 +131,7 @@
                     <div class="col-md-3">
                         <div class="card shadow-sm border-0 mb-2 metric-card cursor-pointer" t-on-click="() => this.openEngagement('ctor')">
                             <div class="card-body">
-                                <h6 class="metric-title text-muted">Click-to-Open (CTOR)</h6>
+                                <h6 class="metric-title text-muted">Click-to-Open (CTOR) <i class="fa fa-info-circle text-muted ms-1" title="Of those who opened, what % clicked. Indicates content effectiveness."/></h6>
                                 <div class="text-center">
                                     <h2 class="text-success metric-value" t-esc="formatPercentage(state.metrics.engagement.ctor)"/>
                                     <small class="text-muted">Clicks: <t t-esc="formatNumber(state.metrics.engagement.total_clicks)"/></small>
@@ -151,7 +151,7 @@
                             <div class="col-md-3">
                                 <div class="card shadow-sm border-0 mb-3 metric-card cursor-pointer" t-on-click="() => this.openConversion('total')">
                                     <div class="card-body p-2 text-center">
-                                        <h6 class="metric-title small text-muted">Total Revenue</h6>
+                                        <h6 class="metric-title small text-muted">Total Revenue <i class="fa fa-info-circle text-muted ms-1" title="Total Invoiced Revenue from confirmed orders linked to mailings."/></h6>
                                         <h4 class="metric-value mb-0 text-success" t-esc="formatCurrency(state.metrics.conversion.total_revenue)"/>
                                     </div>
                                 </div>
@@ -160,7 +160,7 @@
                             <div class="col-md-3">
                                 <div class="card shadow-sm border-0 mb-3 metric-card cursor-pointer" t-on-click="() => this.openConversion('total')">
                                     <div class="card-body p-2 text-center">
-                                        <h6 class="metric-title small text-muted">Rev. per Email</h6>
+                                        <h6 class="metric-title small text-muted">Rev. per Email <i class="fa fa-info-circle text-muted ms-1" title="Average Invoiced Revenue generated per sent email (Total Revenue / Sent Emails)."/></h6>
                                         <h4 class="metric-value mb-0 text-dark" t-esc="formatCurrency(state.metrics.conversion.revenue_per_email)"/>
                                     </div>
                                 </div>
@@ -169,7 +169,7 @@
                             <div class="col-md-3">
                                 <div class="card shadow-sm border-0 mb-3 metric-card cursor-pointer" t-on-click="() => this.openConversion('total')">
                                     <div class="card-body p-2 text-center">
-                                        <h6 class="metric-title small text-muted">Total Conv.</h6>
+                                        <h6 class="metric-title small text-muted">Total Conv. <i class="fa fa-info-circle text-muted ms-1" title="Number of orders that have been fully Invoiced."/></h6>
                                         <h4 class="metric-value mb-0 text-success" t-esc="formatNumber(state.metrics.conversion.total_conversions)"/>
                                     </div>
                                 </div>
@@ -178,7 +178,7 @@
                             <div class="col-md-3">
                                 <div class="card shadow-sm border-0 mb-3 metric-card cursor-pointer" t-on-click="() => this.openConversion('total')">
                                     <div class="card-body p-2 text-center">
-                                        <h6 class="metric-title small text-muted">Conv. Rate</h6>
+                                        <h6 class="metric-title small text-muted">Conv. Rate <i class="fa fa-info-circle text-muted ms-1" title="Percentage of recipients who completed a purchase (Invoiced Orders / Sent Emails)."/></h6>
                                         <h4 class="metric-value mb-0 text-dark" t-esc="formatPercentage(state.metrics.conversion.conversion_rate)"/>
                                     </div>
                                 </div>
@@ -194,7 +194,7 @@
                             <div class="col-md-6">
                                 <div class="card shadow-sm border-0 mb-3 metric-card cursor-pointer" t-on-click="() => this.openConversion('potential')">
                                     <div class="card-body p-2 text-center">
-                                        <h6 class="metric-title small text-muted">Potential Rev.</h6>
+                                        <h6 class="metric-title small text-muted">Potential Rev. <i class="fa fa-info-circle text-muted ms-1" title="Total value of Draft/Sent Quotations and Unbilled Orders (Not yet Invoiced)."/></h6>
                                         <h4 class="metric-value mb-0 text-info" t-esc="formatCurrency(state.metrics.conversion.potential_revenue)"/>
                                     </div>
                                 </div>
@@ -203,7 +203,7 @@
                             <div class="col-md-6">
                                 <div class="card shadow-sm border-0 mb-3 metric-card cursor-pointer" t-on-click="() => this.openConversion('potential')">
                                     <div class="card-body p-2 text-center">
-                                        <h6 class="metric-title small text-muted">Potential Conv.</h6>
+                                        <h6 class="metric-title small text-muted">Potential Conv. <i class="fa fa-info-circle text-muted ms-1" title="Number of Quotations and Unbilled Orders in pipeline."/></h6>
                                         <h4 class="metric-value mb-0 text-info" t-esc="formatNumber(state.metrics.conversion.potential_conversions)"/>
                                     </div>
                                 </div>
@@ -217,7 +217,7 @@
                 <div class="row mb-3">
                     <!-- Top Clicked Links -->
                     <div class="col-md-4">
-                        <h3 class="text-primary mb-2"><i class="fa fa-link me-2"/>Top Clicked Links</h3>
+                        <h3 class="text-primary mb-2"><i class="fa fa-link me-2"/>Top Clicked Links <i class="fa fa-info-circle text-muted fa-xs ms-1" title="Most popular links ranked by total global clicks."/></h3>
                         <div class="card shadow-sm border-0 p-3">
                             <ul class="list-group list-group-flush">
                                 <t t-if="state.metrics.top_links and state.metrics.top_links.length > 0">
@@ -240,7 +240,7 @@
                     
                     <!-- Top Campaigns -->
                     <div class="col-md-4">
-                        <h3 class="text-primary mb-2"><i class="fa fa-trophy me-2"/>Top Campaigns</h3>
+                        <h3 class="text-primary mb-2"><i class="fa fa-trophy me-2"/>Top Campaigns <i class="fa fa-info-circle text-muted fa-xs ms-1" title="Top 5 Campaigns ranked by Total Invoiced Revenue."/></h3>
                         <div class="card shadow-sm border-0 p-3">
                             <ul class="list-group list-group-flush">
                                 <t t-if="state.metrics.top_campaigns and state.metrics.top_campaigns.length > 0">
@@ -263,7 +263,7 @@
 
                     <!-- Top Mailings -->
                     <div class="col-md-4">
-                        <h3 class="text-primary mb-2"><i class="fa fa-envelope me-2"/>Top Mailings</h3>
+                        <h3 class="text-primary mb-2"><i class="fa fa-envelope me-2"/>Top Mailings <i class="fa fa-info-circle text-muted fa-xs ms-1" title="Top 5 Mailings ranked by Total Invoiced Revenue."/></h3>
                         <div class="card shadow-sm border-0 p-3">
                             <ul class="list-group list-group-flush">
                                 <t t-if="state.metrics.top_mailings and state.metrics.top_mailings.length > 0">
