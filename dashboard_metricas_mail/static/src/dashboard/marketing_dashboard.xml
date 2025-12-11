@@ -140,46 +140,72 @@
                         </div>
                     </div>
                 </div>
+                <!-- Conversion Section -->
+                <!-- Conversion Section -->
                 <div class="row mb-3">
-                    <div class="col-12">
+                    <!-- Consolidated Metrics (Left Side) -->
+                    <div class="col-md-8">
                         <h3 class="text-primary mb-2"><i class="fa fa-dollar me-2"/>Conversion</h3>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="card shadow-sm border-0 mb-3">
-                            <div class="card-body">
-                                <h6 class="metric-title text-muted">Total Revenue</h6>
-                                <div class="text-center">
-                                    <h3 class="text-success metric-value" t-esc="formatCurrency(state.metrics.conversion.revenue)"/>
+                        <div class="row">
+                            <!-- Total Revenue -->
+                            <div class="col-md-3">
+                                <div class="card shadow-sm border-0 mb-3 cursor-pointer" t-on-click="() => this.openConversion('total')">
+                                    <div class="card-body p-2 text-center">
+                                        <h6 class="metric-title small text-muted">Total Revenue</h6>
+                                        <h4 class="metric-value mb-0 text-success" t-esc="formatCurrency(state.metrics.conversion.total_revenue)"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Rev. per Email -->
+                            <div class="col-md-3">
+                                <div class="card shadow-sm border-0 mb-3 cursor-pointer" t-on-click="() => this.openConversion('total')">
+                                    <div class="card-body p-2 text-center">
+                                        <h6 class="metric-title small text-muted">Rev. per Email</h6>
+                                        <h4 class="metric-value mb-0 text-dark" t-esc="formatCurrency(state.metrics.conversion.revenue_per_email)"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Total Conversions -->
+                            <div class="col-md-3">
+                                <div class="card shadow-sm border-0 mb-3 cursor-pointer" t-on-click="() => this.openConversion('total')">
+                                    <div class="card-body p-2 text-center">
+                                        <h6 class="metric-title small text-muted">Total Conv.</h6>
+                                        <h4 class="metric-value mb-0 text-success" t-esc="formatNumber(state.metrics.conversion.total_conversions)"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Conv. Rate -->
+                            <div class="col-md-3">
+                                <div class="card shadow-sm border-0 mb-3 cursor-pointer" t-on-click="() => this.openConversion('total')">
+                                    <div class="card-body p-2 text-center">
+                                        <h6 class="metric-title small text-muted">Conv. Rate</h6>
+                                        <h4 class="metric-value mb-0 text-dark" t-esc="formatPercentage(state.metrics.conversion.conversion_rate)"/>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3">
-                        <div class="card shadow-sm border-0 mb-3">
-                            <div class="card-body">
-                                <h6 class="metric-title text-muted">Rev. per Email</h6>
-                                <div class="text-center">
-                                    <h3 class="text-dark metric-value" t-esc="formatCurrency(state.metrics.conversion.revenue_per_email)"/>
+
+                    <!-- Potential Metrics (Right Side) -->
+                    <div class="col-md-4">
+                        <h3 class="text-primary mb-2"><i class="fa fa-line-chart me-2"/>Potential Conversions</h3>
+                        <div class="row">
+                            <!-- Potential Revenue -->
+                            <div class="col-md-6">
+                                <div class="card shadow-sm border-0 mb-3 cursor-pointer" t-on-click="() => this.openConversion('potential')">
+                                    <div class="card-body p-2 text-center">
+                                        <h6 class="metric-title small text-muted">Potential Rev.</h6>
+                                        <h4 class="metric-value mb-0 text-info" t-esc="formatCurrency(state.metrics.conversion.potential_revenue)"/>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="card shadow-sm border-0 mb-3">
-                            <div class="card-body">
-                                <h6 class="metric-title text-muted">Conversions</h6>
-                                <div class="text-center">
-                                    <h3 class="text-dark metric-value" t-esc="formatNumber(state.metrics.conversion.conversions)"/>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                     <div class="col-md-3">
-                        <div class="card shadow-sm border-0 mb-3">
-                            <div class="card-body">
-                                <h6 class="metric-title text-muted">Conversion Rate</h6>
-                                <div class="text-center">
-                                    <h3 class="text-dark metric-value" t-esc="formatPercentage(state.metrics.conversion.conversion_rate)"/>
+                            <!-- Potential Conversions -->
+                            <div class="col-md-6">
+                                <div class="card shadow-sm border-0 mb-3 cursor-pointer" t-on-click="() => this.openConversion('potential')">
+                                    <div class="card-body p-2 text-center">
+                                        <h6 class="metric-title small text-muted">Potential Conv.</h6>
+                                        <h4 class="metric-value mb-0 text-info" t-esc="formatNumber(state.metrics.conversion.potential_conversions)"/>
+                                    </div>
                                 </div>
                             </div>
                         </div>

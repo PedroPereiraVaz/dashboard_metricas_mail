@@ -71,7 +71,7 @@ class MarketingDashboardHandler(models.TransientModel):
         }
 
     @api.model
-    def get_filter_options(self, campaign_id=None):
+    def get_filter_options(self, campaign_id=None, mailing_id=None):
         """
         Returns available campaigns and mailings for filters.
         """
@@ -94,9 +94,29 @@ class MarketingDashboardHandler(models.TransientModel):
                     mailing_domain.append(('campaign_id', '=', int(campaign_id)))
                 except (ValueError, TypeError):
                     pass # Ignore invalid campaign_id
-
+        
+        # Fetch default recent mailings
         mailings = self.env['mailing.mailing'].sudo().search_read(mailing_domain, ['id', 'subject', 'sent_date'], order='sent_date desc', limit=50)
         
+        # Ensure the selected mailing_id is in the list (if it exists)
+        if mailing_id:
+            try:
+                m_id = int(mailing_id)
+                # Check if the selected mailing is already in the list
+                found = False
+                for m in mailings:
+                    if m['id'] == m_id:
+                        found = True
+                        break
+                
+                if not found:
+                     # Fetch specifically this one
+                     specific_mailing = self.env['mailing.mailing'].sudo().search_read([('id', '=', m_id)], ['id', 'subject', 'sent_date'], limit=1)
+                     if specific_mailing:
+                         mailings.extend(specific_mailing)
+            except (ValueError, TypeError):
+                pass
+
         return {
             'campaigns': campaigns,
             'mailings': [{'id': m['id'], 'name': f"{m['subject']} ({m['sent_date'] or 'No Date'})"} for m in mailings],
@@ -224,34 +244,57 @@ class MarketingDashboardHandler(models.TransientModel):
 
     @api.model
     def get_conversion_metrics(self, domain):
-        # Requires mass_mailing_sale or similar for revenue
-        
-        # Ensure we are finding mailings first
+        """
+        Calculate detailed conversion metrics from linked sale.order records.
+        """
+        # Ensure we are finding mailings first to establish context
         mailings = self.env['mailing.mailing'].search(domain)
         
         if not mailings:
              return {
-                'revenue': 0,
-                'revenue_per_email': 0,
-                'conversions': 0,
+                'potential_revenue': 0,
+                'potential_conversions': 0,
+                'total_revenue': 0,
+                'total_conversions': 0,
                 'conversion_rate': 0,
+                'revenue_per_email': 0,
             }
 
-        revenue = 0
-        conversions = 0
+        # Build domain for sale.order
+        # We need to find orders linked to these mailings
+        # Since 'mass_mailing_id' is not available on sale.order, we use the UTM Source.
+        # Each mailing has a defined source_id that is passed to the order via tracking.
         
-        if 'sale_invoiced_amount' in self.env['mailing.mailing']._fields:
-            for mailing in mailings:
-                revenue += mailing.sale_invoiced_amount
-                conversions += mailing.sale_quotation_count
+        sources = mailings.mapped('source_id')
+        sale_domain = [('source_id', 'in', sources.ids)] if sources else [('id', '=', 0)] # Fallback if no sources
+        
+        Orders = self.env['sale.order']
+        
+        # POTENTIAL: 
+        # 1. Draft/Sent Quotations (Presupuestos)
+        # 2. Confirmed Orders NOT fully invoiced (state='sale' AND invoice_status != 'invoiced')
+        # This captures all pipeline revenue: Quotes, "To Invoice", "Upselling", "Nothing to Invoice" (e.g. waiting for delivery)
+        potential_domain = sale_domain + ['|', '|', ('state', '=', 'draft'), ('state', '=', 'sent'), '&', ('state', '=', 'sale'), ('invoice_status', '!=', 'invoiced')]
+        potential_orders = Orders.search(potential_domain)
+        potential_revenue = sum(potential_orders.mapped('amount_total'))
+        potential_conversions = len(potential_orders)
+        
+        # CONSOLIDATED (Total): State in 'sale', 'done' AND invoice_status = 'invoiced'
+        # This ensures we only show fully invoiced revenue as requested
+        total_domain = sale_domain + [('state', 'in', ['sale', 'done']), ('invoice_status', '=', 'invoiced')]
+        total_orders = Orders.search(total_domain)
+        total_revenue = sum(total_orders.mapped('amount_total'))
+        total_conversions = len(total_orders)
         
         total_sent = sum(mailings.mapped('sent'))
         
         return {
-            'revenue': revenue,
-            'revenue_per_email': (revenue / total_sent) if total_sent else 0,
-            'conversions': conversions,
-            'conversion_rate': (conversions / total_sent * 100) if total_sent else 0,
+            'potential_revenue': potential_revenue,
+            'potential_conversions': potential_conversions,
+            'total_revenue': total_revenue, # Now using amount_total (with tax)
+            'total_conversions': total_conversions,
+            'conversion_rate': (total_conversions / total_sent * 100) if total_sent else 0,
+            'revenue_per_email': (total_revenue / total_sent) if total_sent else 0,
         }
 
     @api.model

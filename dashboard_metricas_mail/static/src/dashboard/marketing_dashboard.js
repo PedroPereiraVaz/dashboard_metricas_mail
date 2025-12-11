@@ -9,18 +9,29 @@ export class MarketingDashboard extends Component {
     setup() {
         this.orm = useService("orm");
         this.action = useService("action");
+
+        // Initialize state with stored filters if available
+        const storedFilters = JSON.parse(localStorage.getItem('marketing_dashboard_filters')) || {};
+
         this.state = useState({
             metrics: {
                 deliverability: {},
                 engagement: {},
-                conversion: {},
+                conversion: {
+                    potential_revenue: 0,
+                    potential_conversions: 0,
+                    total_revenue: 0,
+                    total_conversions: 0,
+                    conversion_rate: 0,
+                    revenue_per_email: 0,
+                },
                 list_health: {},
                 campaign_stages: { stages: [], has_stages: false },
                 ab_testing: {},
             },
             filters: {
-                campaign_id: "",
-                mailing_id: "",
+                campaign_id: parseInt(storedFilters.campaign_id) || "",
+                mailing_id: parseInt(storedFilters.mailing_id) || "",
             },
             options: {
                 campaigns: [],
@@ -40,7 +51,10 @@ export class MarketingDashboard extends Component {
     async loadFilters() {
         try {
             // Pass the current campaign_id to filter mailings
-            const args = [this.state.filters.campaign_id || null];
+            const args = [
+                this.state.filters.campaign_id || null,
+                this.state.filters.mailing_id || null
+            ];
             const result = await this.orm.call("marketing.dashboard.handler", "get_filter_options", args);
             this.state.options = result;
         } catch (error) {
@@ -74,6 +88,12 @@ export class MarketingDashboard extends Component {
             this.state.filters.mailing_id = "";
             await this.loadFilters();
         }
+
+        // Save filters to localStorage
+        localStorage.setItem('marketing_dashboard_filters', JSON.stringify({
+            campaign_id: this.state.filters.campaign_id,
+            mailing_id: this.state.filters.mailing_id
+        }));
 
         await this.fetchData();
     }
@@ -146,6 +166,44 @@ export class MarketingDashboard extends Component {
             domain.push(['id', '=', parseInt(this.state.filters.campaign_id)]);
         }
         this.openView("utm.campaign", domain);
+    }
+
+    async openConversion(type) {
+        const domain = [];
+
+        // Apply filters (prioritizing mailing_id as per requirements)
+        if (this.state.filters.mailing_id) {
+            // We need to find the source_id of this mailing to filter orders
+            const mailings = await this.orm.read("mailing.mailing", [parseInt(this.state.filters.mailing_id)], ["source_id"]);
+            if (mailings && mailings.length > 0 && mailings[0].source_id) {
+                domain.push(['source_id', '=', mailings[0].source_id[0]]);
+            } else {
+                // If the mailing has no source_id, it cannot have generated orders via standard tracking
+                // Force an empty result to match backend logic
+                domain.push(['id', '=', -1]);
+            }
+        } else if (this.state.filters.campaign_id) {
+            domain.push(['campaign_id', '=', parseInt(this.state.filters.campaign_id)]);
+        }
+
+        if (type === 'potential') {
+            // New Logic: 
+            // 1. Draft/Sent Quotes
+            // 2. Confirmed Orders NOT fully invoiced
+            domain.push('|');
+            domain.push('|');
+            domain.push(['state', '=', 'draft']);
+            domain.push(['state', '=', 'sent']);
+            domain.push('&');
+            domain.push(['state', '=', 'sale']);
+            domain.push(['invoice_status', '!=', 'invoiced']);
+        } else if (type === 'total') {
+            domain.push(['state', 'in', ['sale', 'done']]);
+            domain.push(['invoice_status', '=', 'invoiced']);
+        }
+        // 'all' or others could just not filter state
+
+        this.openView("sale.order", domain);
     }
 
     openAutomation(type) {
