@@ -27,6 +27,7 @@ export class MarketingDashboard extends Component {
                 },
                 list_health: {},
                 campaign_stages: { stages: [], has_stages: false },
+                top_links: [],
                 ab_testing: {},
             },
             filters: {
@@ -243,6 +244,23 @@ export class MarketingDashboard extends Component {
         }
 
         this.openView("mailing.trace", domain);
+    }
+
+    openLinkStats(link) {
+        // User requested: Open the short URL with a '+' at the end to see public stats
+        if (link.short_url) {
+            window.open(link.short_url + '+', '_blank');
+        } else {
+            // Fallback to Odoo Form View if no short_url
+            this.action.doAction({
+                type: "ir.actions.act_window",
+                name: "Link Statistics",
+                res_model: "link.tracker",
+                views: [[false, "form"]],
+                res_id: link.id,
+                target: "current",
+            });
+        }
     }
 
     openAutomation(type) {

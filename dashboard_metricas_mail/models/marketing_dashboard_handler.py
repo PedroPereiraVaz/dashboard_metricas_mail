@@ -29,6 +29,7 @@ class MarketingDashboardHandler(models.TransientModel):
             'conversion': self.get_conversion_metrics(domain),
             'list_health': self.get_list_health_metrics(), # List health is global
             'campaign_stages': self.get_campaign_stages(campaign_id),
+            'top_links': self.get_top_links(domain),
             'ab_testing': self.get_ab_testing_metrics(domain),
         }
 
@@ -68,7 +69,68 @@ class MarketingDashboardHandler(models.TransientModel):
         return {
             'stages': stage_data,
             'has_stages': True,
+            'has_stages': True,
         }
+
+    @api.model
+    def get_top_links(self, domain):
+        """
+        Get top 5 clicked links.
+        """
+        # Ensure we have mailings context
+        mailings = self.env['mailing.mailing'].search(domain)
+        if not mailings:
+             return []
+
+        # Filter clicks by these mailings
+        # 'link.tracker.click' has 'mass_mailing_id'
+        click_domain = [('mass_mailing_id', 'in', mailings.ids)]
+        
+        # Read Group to count clicks per link
+        # 'link_id' is the Many2one to link.tracker
+        groups = self.env['link.tracker.click'].read_group(
+            click_domain,
+            ['link_id'],
+            ['link_id'],
+            orderby='link_id_count desc',
+            limit=5
+        )
+        
+        links_data = []
+        for g in groups:
+            if not g['link_id']:
+                continue
+                
+            # g['link_id'] is usually (id, name) tuple in read_group for m2o
+            link_id = g['link_id'][0]
+            link_name = g['link_id'][1] or "Unknown Link"
+            count = g['link_id_count']
+            
+            # Fetch full link object to get title and label
+            link = self.env['link.tracker'].browse(link_id)
+            # Display both Title and Label if available
+            parts = []
+            if link.title:
+                parts.append(link.title)
+            if link.label:
+                parts.append(link.label)
+            
+            display_name = " - ".join(parts) if parts else link_name
+            
+            # Use the Global click count from the link object to match user expectation ("various")
+            # The 'count' from read_group is filtered by mailing, which might be why they see 1.
+            # Showing global popularity is often more useful for "Top Links".
+            total_clicks = link.count 
+            
+            links_data.append({
+                'id': link_id,
+                'name': display_name,
+                'url': link.url, # storing URL separately for the href
+                'short_url': link.short_url, # For the + stats redirection
+                'count': total_clicks
+            })
+            
+        return links_data
 
     @api.model
     def get_filter_options(self, campaign_id=None, mailing_id=None):

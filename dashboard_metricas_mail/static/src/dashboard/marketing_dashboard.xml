@@ -213,8 +213,25 @@
                 </div>
 
                 <!-- List Health & Automation -->
+                <!-- Top Links, List Health, Campaign Stages -->
                 <div class="row mb-3">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
+                        <h3 class="text-primary mb-2"><i class="fa fa-link me-2"/>Top Clicked Links</h3>
+                        <div class="card shadow-sm border-0 p-3">
+                            <ul class="list-group list-group-flush" t-if="state.metrics.top_links.length > 0">
+                                <t t-foreach="state.metrics.top_links" t-as="link" t-key="link.id">
+                                    <li class="list-group-item d-flex justify-content-between align-items-center mb-1 rounded shadow-sm metric-card bg-light text-dark cursor-pointer" t-on-click="() => this.openLinkStats(link)">
+                                        <span class="text-truncate fw-bold text-dark metric-list-text" style="max-width: 80%;" t-esc="link.name"/>
+                                        <span class="badge bg-primary rounded-pill metric-list-text text-white" t-esc="formatNumber(link.count)"/>
+                                    </li>
+                                </t>
+                            </ul>
+                            <div t-else="" class="text-center text-muted p-2">
+                                No clicks recorded.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
                         <h3 class="text-primary mb-2"><i class="fa fa-heartbeat me-2"/>List Health</h3>
                         <div class="card shadow-sm border-0 p-3">
                             <ul class="list-group list-group-flush">
@@ -237,7 +254,7 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <h3 class="text-primary mb-2"><i class="fa fa-columns me-2"/>Campaign Stages</h3>
                         <div class="card shadow-sm border-0 p-3">
                             <ul class="list-group list-group-flush" t-if="state.metrics.campaign_stages.has_stages">
