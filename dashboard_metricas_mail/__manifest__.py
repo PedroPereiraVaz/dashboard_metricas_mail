@@ -16,49 +16,39 @@
         
         🎯 Valor que Aporta
         -------------------
-        Odoo nativo dispersa las métricas de email marketing en múltiples vistas
-        y reportes. Este módulo consolida toda la información crítica (entregabilidad,
-        interacción, conversión y salud de listas) en una única pantalla interactiva,
-        permitiendo decisiones rápidas basadas en datos reales.
+        Consolide toda la información crítica (entregabilidad, interacción, conversión
+        y salud de listas) en una única pantalla interactiva.
         
-        ✨ Características Principales
-        ------------------------------
-        • Vista Unificada: Monitoreo en tiempo real de Enviados, Entregados, Rebotes y Respuestas
-        • Analíticas de Engagement: Cálculo preciso de Tasa de Apertura, CTR y CTOR
-        • Tracking de Conversión: Visualización de Ingresos y Cotizaciones generadas
-        • Salud de Listas: Análisis de contactos Activos vs. Lista Negra y crecimiento reciente
-        • Etapas de Campaña: Visualización del ciclo de vida de sus campañas
-        • Filtros Inteligentes: Filtrado dependiente (Campaña -> Envíos) para aislar datos
+        ✨ Nuevas Características & Mejoras
+        -----------------------------------
+        • 📊 Conversión Avanzada: Desglose de "Ingresos Facturados" vs "Potenciales" y conteo de conversiones.
+        • 🏆 Top Charts (Rankings):
+            - Top 5 Campañas (por ingresos)
+            - Top 5 Envíos (por ingresos)
+            - Enlaces más clicados (con acceso directo a stats)
+        • ℹ️ Ayudas Visuales: Tooltips explicativos (i) en cada métrica y efectos visuales Hover.
+        • 🌍 Internacionalización: Traducción completa al Español (es_ES).
+        
+        🚀 Funcionalidades Clave
+        ------------------------
+        • Vista Unificada: Monitoreo en tiempo real de Enviados, Entregados, Rebotes y Respuestas.
+        • Analíticas de Engagement: Tasa de Apertura, CTR y CTOR interactivos.
+        • Salud de Listas: Análisis de contactos Activos vs. Lista Negra.
+        • Etapas de Campaña: Visualización del ciclo de vida de sus campañas.
+        • Filtros Inteligentes: Filtrado dependiente (Campaña -> Envíos) y PERSISTENTE.
         
         🔧 Detalles Técnicos
         --------------------
-        El módulo utiliza tecnologías estándar de Odoo 18:
-        
-        • Framework Owl: Interfaz reactiva y moderna
-        • Arquitectura: Cliente-Servidor optimizado para métricas
-        • Compatibilidad: Funciona en Community y Enterprise sin dependencias extra
-        
-        📊 Casos de Uso
-        ---------------
-        Ideal para equipos de marketing que:
-        - Necesitan reportes rápidos de rendimiento de campañas
-        - Quieren entender por qué rebotan sus correos (Drill-down)
-        - Buscan correlacionar envíos con ventas reales
-        - Gestionan múltiples campañas y necesitan filtrar ágilmente
+        • Framework Owl: Interfaz reactiva y moderna.
+        • Arquitectura optimizada para grandes volúmenes de datos.
+        • Compatible con Odoo 18 Community y Enterprise.
         
         🚀 Instalación y Uso
         --------------------
-        1. Instale el módulo "Email Marketing Dashboard"
-        2. Vaya a Email Marketing > Informes > Dashboard de Métricas
-        3. Use los filtros superiores para explorar sus datos
+        1. Instale el módulo "Email Marketing Dashboard".
+        2. Vaya a Email Marketing > Informes > Dashboard de Métricas.
         
-        No requiere configuración adicional. Se integra automáticamente con
-        los datos de Mass Mailing existentes.
-        
-        📝 Notas Técnicas
-        -----------------
-        Compatible con Odoo 18 Community y Enterprise.
-        
+        No requiere configuración adicional. Se integra automáticamente.
     ''',
     'depends': [
         'base',
