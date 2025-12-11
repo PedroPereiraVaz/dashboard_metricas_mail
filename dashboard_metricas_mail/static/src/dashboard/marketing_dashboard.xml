@@ -213,25 +213,81 @@
                 </div>
 
                 <!-- List Health & Automation -->
-                <!-- Top Links, List Health, Campaign Stages -->
+                <!-- Top Charts Row -->
                 <div class="row mb-3">
+                    <!-- Top Clicked Links -->
                     <div class="col-md-4">
                         <h3 class="text-primary mb-2"><i class="fa fa-link me-2"/>Top Clicked Links</h3>
                         <div class="card shadow-sm border-0 p-3">
-                            <ul class="list-group list-group-flush" t-if="state.metrics.top_links.length > 0">
-                                <t t-foreach="state.metrics.top_links" t-as="link" t-key="link.id">
-                                    <li class="list-group-item d-flex justify-content-between align-items-center mb-1 rounded shadow-sm metric-card bg-light text-dark cursor-pointer" t-on-click="() => this.openLinkStats(link)">
-                                        <span class="text-truncate fw-bold text-dark metric-list-text" style="max-width: 80%;" t-esc="link.name"/>
-                                        <span class="badge bg-primary rounded-pill metric-list-text text-white" t-esc="formatNumber(link.count)"/>
+                            <ul class="list-group list-group-flush">
+                                <t t-if="state.metrics.top_links and state.metrics.top_links.length > 0">
+                                    <t t-foreach="state.metrics.top_links" t-as="link" t-key="link.id">
+                                        <li class="list-group-item d-flex justify-content-between align-items-center mb-1 rounded shadow-sm metric-card bg-light text-dark cursor-pointer" t-on-click="() => this.openLinkStats(link)">
+                                            <span class="text-truncate fw-bold text-dark metric-list-text" style="max-width: 80%;" t-esc="link.name"/>
+                                            <span class="badge bg-primary rounded-pill metric-list-text text-white" t-esc="formatNumber(link.count)"/>
+                                        </li>
+                                    </t>
+                                </t>
+                                <!-- Placeholders -->
+                                <t t-foreach="getPlaceholders(state.metrics.top_links)" t-as="ph" t-key="ph">
+                                    <li class="list-group-item d-flex justify-content-between align-items-center mb-1 rounded shadow-sm metric-card bg-light text-dark" style="visibility: hidden; pointer-events: none;">
+                                        <span class="metric-list-text">-</span>
                                     </li>
                                 </t>
                             </ul>
-                            <div t-else="" class="text-center text-muted p-2">
-                                No clicks recorded.
-                            </div>
                         </div>
                     </div>
+                    
+                    <!-- Top Campaigns -->
                     <div class="col-md-4">
+                        <h3 class="text-primary mb-2"><i class="fa fa-trophy me-2"/>Top Campaigns</h3>
+                        <div class="card shadow-sm border-0 p-3">
+                            <ul class="list-group list-group-flush">
+                                <t t-if="state.metrics.top_campaigns and state.metrics.top_campaigns.length > 0">
+                                    <t t-foreach="state.metrics.top_campaigns" t-as="camp" t-key="camp.id">
+                                        <li class="list-group-item d-flex justify-content-between align-items-center mb-1 rounded shadow-sm metric-card bg-light text-dark cursor-pointer" t-on-click="() => this.openTopCampaign(camp.id)">
+                                            <span class="text-truncate fw-bold text-dark metric-list-text" style="max-width: 60%;" t-esc="camp.name"/>
+                                            <span class="badge bg-success rounded-pill metric-list-text text-white" t-esc="formatCurrency(camp.total_revenue)"/>
+                                        </li>
+                                    </t>
+                                </t>
+                                <!-- Placeholders -->
+                                <t t-foreach="getPlaceholders(state.metrics.top_campaigns)" t-as="ph" t-key="ph">
+                                    <li class="list-group-item d-flex justify-content-between align-items-center mb-1 rounded shadow-sm metric-card bg-light text-dark" style="visibility: hidden; pointer-events: none;">
+                                        <span class="metric-list-text">-</span>
+                                    </li>
+                                </t>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Top Mailings -->
+                    <div class="col-md-4">
+                        <h3 class="text-primary mb-2"><i class="fa fa-envelope me-2"/>Top Mailings</h3>
+                        <div class="card shadow-sm border-0 p-3">
+                            <ul class="list-group list-group-flush">
+                                <t t-if="state.metrics.top_mailings and state.metrics.top_mailings.length > 0">
+                                    <t t-foreach="state.metrics.top_mailings" t-as="mail" t-key="mail.id">
+                                        <li class="list-group-item d-flex justify-content-between align-items-center mb-1 rounded shadow-sm metric-card bg-light text-dark cursor-pointer" t-on-click="() => this.openTopMailing(mail.id)">
+                                            <span class="text-truncate fw-bold text-dark metric-list-text" style="max-width: 60%;" t-esc="mail.name"/>
+                                            <span class="badge bg-info rounded-pill metric-list-text text-white" t-esc="formatCurrency(mail.total_revenue)"/>
+                                        </li>
+                                    </t>
+                                </t>
+                                <!-- Placeholders -->
+                                <t t-foreach="getPlaceholders(state.metrics.top_mailings)" t-as="ph" t-key="ph">
+                                    <li class="list-group-item d-flex justify-content-between align-items-center mb-1 rounded shadow-sm metric-card bg-light text-dark" style="visibility: hidden; pointer-events: none;">
+                                        <span class="metric-list-text">-</span>
+                                    </li>
+                                </t>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- List Health & Campaign Stages -->
+                <div class="row mb-3">
+                    <div class="col-md-6">
                         <h3 class="text-primary mb-2"><i class="fa fa-heartbeat me-2"/>List Health</h3>
                         <div class="card shadow-sm border-0 p-3">
                             <ul class="list-group list-group-flush">
@@ -254,7 +310,7 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <h3 class="text-primary mb-2"><i class="fa fa-columns me-2"/>Campaign Stages</h3>
                         <div class="card shadow-sm border-0 p-3">
                             <ul class="list-group list-group-flush" t-if="state.metrics.campaign_stages.has_stages">

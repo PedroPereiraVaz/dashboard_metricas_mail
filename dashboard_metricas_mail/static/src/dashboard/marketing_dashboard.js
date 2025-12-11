@@ -28,6 +28,8 @@ export class MarketingDashboard extends Component {
                 list_health: {},
                 campaign_stages: { stages: [], has_stages: false },
                 top_links: [],
+                top_campaigns: [],
+                top_mailings: [],
                 ab_testing: {},
             },
             filters: {
@@ -71,6 +73,9 @@ export class MarketingDashboard extends Component {
                 this.state.filters.mailing_id || null,
             ];
             const result = await this.orm.call("marketing.dashboard.handler", "get_dashboard_data", args);
+            // Ensure defaults for new keys if backend cache is stale
+            result.top_campaigns = result.top_campaigns || [];
+            result.top_mailings = result.top_mailings || [];
             this.state.metrics = result;
         } catch (error) {
             console.error("Error fetching dashboard data:", error);
@@ -263,6 +268,28 @@ export class MarketingDashboard extends Component {
         }
     }
 
+    openTopCampaign(campaignId) {
+        this.action.doAction({
+            type: "ir.actions.act_window",
+            name: "Campaign",
+            res_model: "utm.campaign",
+            views: [[false, "form"]],
+            res_id: campaignId,
+            target: "current",
+        });
+    }
+
+    openTopMailing(mailingId) {
+        this.action.doAction({
+            type: "ir.actions.act_window",
+            name: "Mailing",
+            res_model: "mailing.mailing",
+            views: [[false, "form"]],
+            res_id: mailingId,
+            target: "current",
+        });
+    }
+
     openAutomation(type) {
         if (!this.state.metrics.automation.installed) {
             this.env.services.notification.add("Marketing Automation module is not installed.", {
@@ -311,6 +338,14 @@ export class MarketingDashboard extends Component {
         if (name.includes('sent') || name.includes('enviado')) return 'text-success';
         if (name.includes('cancel') || name.includes('stopped')) return 'text-danger';
         return 'text-dark';
+    }
+
+    getPlaceholders(list) {
+        if (!list) return [1, 2, 3, 4, 5];
+        const missing = 5 - list.length;
+        if (missing <= 0) return [];
+        // Return an array of determined length to iterate over
+        return Array(missing).fill(0).map((_, i) => i);
     }
 }
 

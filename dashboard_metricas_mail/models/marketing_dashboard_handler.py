@@ -30,6 +30,8 @@ class MarketingDashboardHandler(models.TransientModel):
             'list_health': self.get_list_health_metrics(), # List health is global
             'campaign_stages': self.get_campaign_stages(campaign_id),
             'top_links': self.get_top_links(domain),
+            'top_campaigns': self.get_top_campaigns(domain),
+            'top_mailings': self.get_top_mailings(domain),
             'ab_testing': self.get_ab_testing_metrics(domain),
         }
 
@@ -130,7 +132,97 @@ class MarketingDashboardHandler(models.TransientModel):
                 'count': total_clicks
             })
             
+        # Sort by total_clicks desc (since user wants to see them ordered by the number shown)
+        links_data.sort(key=lambda x: x['count'], reverse=True)
+            
         return links_data
+
+    @api.model
+    def get_top_campaigns(self, domain):
+        """
+        Get top 5 campaigns by Invoiced Revenue.
+        """
+        # 1. Reuse logic to find relevant source_ids from the domain
+        # The domain comes for 'mailing.mailing'. 
+        mailings = self.env['mailing.mailing'].search(domain)
+        source_ids = mailings.mapped('source_id').ids
+        if not source_ids:
+             return []
+
+        # 2. Query sale.order to get revenue by campaign
+        # We need to group by campaign_id.
+        # Ensure we only count invoiced orders.
+        order_domain = [
+            ('invoice_status', '=', 'invoiced'),
+            ('source_id', 'in', source_ids),
+            ('campaign_id', '!=', False) 
+        ]
+        
+        groups = self.env['sale.order'].read_group(
+            order_domain,
+            ['campaign_id', 'amount_total'],
+            ['campaign_id'],
+            orderby='amount_total desc',
+            limit=5
+        )
+        
+        data = []
+        for g in groups:
+            if not g['campaign_id']:
+                continue
+            data.append({
+                'id': g['campaign_id'][0],
+                'name': g['campaign_id'][1],
+                'total_revenue': g['amount_total']
+            })
+        return data
+
+    @api.model
+    def get_top_mailings(self, domain):
+        """
+        Get top 5 mailings by Invoiced Revenue.
+        """
+        mailings = self.env['mailing.mailing'].search(domain)
+        source_ids = mailings.mapped('source_id').ids
+        if not source_ids:
+             return []
+
+        # Group by source_id (which maps 1:1 to mailing usually)
+        order_domain = [
+            ('invoice_status', '=', 'invoiced'),
+            ('source_id', 'in', source_ids)
+        ]
+        
+        groups = self.env['sale.order'].read_group(
+            order_domain,
+            ['source_id', 'amount_total'],
+            ['source_id'],
+            orderby='amount_total desc',
+            limit=5
+        )
+        
+        data = []
+        for g in groups:
+            if not g['source_id']:
+                continue
+            
+            source_id = g['source_id'][0]
+            revenue = g['amount_total']
+            
+            # Try to find the mailing subject for this source
+            # We search based on source_id because that's what we have from the Order
+            mailing = self.env['mailing.mailing'].search([('source_id', '=', source_id)], limit=1)
+            name = mailing.subject if mailing else g['source_id'][1]
+            mailing_id = mailing.id if mailing else False
+            
+            if mailing_id:
+                data.append({
+                    'id': mailing_id,
+                    'name': name,
+                    'total_revenue': revenue
+                })
+                
+        return data
 
     @api.model
     def get_filter_options(self, campaign_id=None, mailing_id=None):
