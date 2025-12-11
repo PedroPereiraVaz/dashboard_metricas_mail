@@ -206,6 +206,28 @@ export class MarketingDashboard extends Component {
         this.openView("sale.order", domain);
     }
 
+    async openEngagement(type) {
+        const domain = [];
+
+        // Filter by Status based on type
+        if (type === 'open') {
+            domain.push(['open_datetime', '!=', false]);
+        } else if (type === 'click' || type === 'ctor') {
+            domain.push(['links_click_datetime', '!=', false]);
+        } else if (type === 'reply') {
+            domain.push(['reply_datetime', '!=', false]);
+        }
+
+        // Apply visual filters (Campaign / Mailing)
+        if (this.state.filters.mailing_id) {
+            domain.push(['mass_mailing_id', '=', parseInt(this.state.filters.mailing_id)]);
+        } else if (this.state.filters.campaign_id) {
+            domain.push(['mass_mailing_id.campaign_id', '=', parseInt(this.state.filters.campaign_id)]);
+        }
+
+        this.openView("mailing.trace", domain);
+    }
+
     openAutomation(type) {
         if (!this.state.metrics.automation.installed) {
             this.env.services.notification.add("Marketing Automation module is not installed.", {
