@@ -183,7 +183,24 @@ export class MarketingDashboard extends Component {
                 domain.push(['id', '=', -1]);
             }
         } else if (this.state.filters.campaign_id) {
-            domain.push(['campaign_id', '=', parseInt(this.state.filters.campaign_id)]);
+            // STRICT FILTERING: Match Dashboard Logic
+            // Fetch all mailings for this campaign to get their source_ids
+            const mailings = await this.orm.searchRead(
+                "mailing.mailing",
+                [['campaign_id', '=', parseInt(this.state.filters.campaign_id)]],
+                ['source_id']
+            );
+
+            // Extract source_ids (filtering out any nulls)
+            const sourceIds = mailings
+                .map(m => m.source_id && m.source_id[0])
+                .filter(id => id);
+
+            if (sourceIds.length > 0) {
+                domain.push(['source_id', 'in', sourceIds]);
+            } else {
+                domain.push(['id', '=', -1]);
+            }
         }
 
         if (type === 'potential') {
