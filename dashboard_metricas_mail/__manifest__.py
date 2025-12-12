@@ -55,6 +55,7 @@
         'mass_mailing',
         'web',
         'utm',
+        'sale',
     ],
     'data': [
         'security/ir.model.access.csv',
